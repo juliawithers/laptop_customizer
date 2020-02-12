@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import CustomizeOptions from './CustomizeOptions'
-import Summary from './Summary'
-import Total from './Total'
 import './App.css';
-
-// This object will allow us to
-// easily convert numbers into US dollar values
-// const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-//   style: 'currency',
-//   currency: 'USD'
-// });
+import CreateForm from './CreateForm'
+import CreateSection from './CreateSection'
 
 class App extends Component {
   state = {
@@ -42,88 +34,22 @@ class App extends Component {
   };
 
   render() {
-    // const features = Object.keys(this.props.features).map((feature, idx) => {
-    //   const featureHash = feature + '-' + idx;
-    //   const options = this.props.features[feature].map(item => {
-    //     const itemHash = slugify(JSON.stringify(item));
-    //     return (
-    //       <div key={itemHash} className="feature__item">
-    //         <input
-    //           type="radio"
-    //           id={itemHash}
-    //           className="feature__option"
-    //           name={slugify(feature)}
-    //           checked={item.name === this.state.selected[feature].name}
-    //           onChange={e => this.updateFeature(feature, item)}
-    //         />
-    //         <label htmlFor={itemHash} className="feature__label">
-    //           {item.name} ({USCurrencyFormat.format(item.cost)})
-    //         </label>
-    //       </div>
-    //     );
-    //   });
-
-    //   return (
-    //     <fieldset className="feature" key={featureHash}>
-    //       <legend className="feature__name">
-    //         <h3>{feature}</h3>
-    //       </legend>
-    //       {options}
-    //     </fieldset>
-    //   );
-    // });
-
-    // const summary = Object.keys(this.state.selected).map((feature, idx) => {
-    //   const featureHash = feature + '-' + idx;
-    //   const selectedOption = this.state.selected[feature];
-
-    //   return (
-    //     <div className="summary__option" key={featureHash}>
-    //       <div className="summary__option__label">{feature} </div>
-    //       <div className="summary__option__value">{selectedOption.name}</div>
-    //       <div className="summary__option__cost">
-    //         {USCurrencyFormat.format(selectedOption.cost)}
-    //       </div>
-    //     </div>
-    //   );
-    // });
-
-    // const total = Object.keys(this.state.selected).reduce(
-    //   (acc, curr) => acc + this.state.selected[curr].cost,
-    //   0
-    // );
-    
     return (
       <div className="App">
         <header>
           <h1>ELF Computing | Laptops</h1>
         </header>
         <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {/* {features} */}
-            <CustomizeOptions 
-              selected = {this.state.selected}
-              features = {this.props.features}
-              handleUpdateFeature = {(feature, newValue) => this.updateFeature(feature,newValue)}
-              />
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {/* {summary} */}
-            <Summary 
-              selected={this.state.selected}
-              />
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {/* {USCurrencyFormat.format(total)} */}
-                <Total 
-                  selected={this.state.selected}
-                  />
-              </div>
-            </div>
-          </section>
+          {/* start breakdown at main */}
+          <CreateForm 
+            className="main_form"
+            selected = {this.state.selected}
+            features = {this.props.features}
+            handleUpdateFeature = {this.updateFeature}/>
+          <CreateSection
+            className="main_summary"
+            selected={this.state.selected}
+            />
         </main>
       </div>
     );

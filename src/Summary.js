@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import USCurrencyCreate from './USCurrencyCreate';
+import CreateSummaryOption from './CreateSummaryOption'
 
 
 export default class Summary extends Component{
@@ -10,13 +10,11 @@ export default class Summary extends Component{
             const selectedOption = this.props.selected[feature];
 
             return (
-            <div className="summary__option" key={featureHash}>
-                <div className="summary__option__label">{feature} </div>
-                <div className="summary__option__value">{selectedOption.name}</div>
-                <div className="summary__option__cost">
-                <USCurrencyCreate cost={selectedOption.cost}/>
-                </div>
-            </div>
+                <CreateSummaryOption
+                    key={featureHash}
+                    feature={feature}
+                    option={selectedOption.name}
+                    cost={selectedOption.cost}/>
             );
         });
         return summary

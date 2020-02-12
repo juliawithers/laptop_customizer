@@ -7,6 +7,8 @@ import USCurrencyCreate from './USCurrencyCreate'
 export default class CreateOptions extends Component{
     render(){ 
         const itemHash = slugify(JSON.stringify(this.props.item));       
+        const { feature, item } = this.props;
+
             return (
                 <div key={itemHash} className="feature__item">
                     <input
@@ -15,7 +17,7 @@ export default class CreateOptions extends Component{
                         className="feature__option"
                         name={slugify(this.props.feature)}
                         checked={this.props.item.name === this.props.selected[this.props.feature].name}
-                        onChange={e => this.props.handleUpdateFeature(e.feature, e.item)}
+                        onChange={() => this.props.handleUpdateFeature(feature, item)}
                     />
                     <label htmlFor={itemHash} className="feature__label">
                         {this.props.item.name} (<USCurrencyCreate cost={this.props.item.cost}/>)
